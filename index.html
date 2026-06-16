@@ -565,7 +565,7 @@ async function enviarLead(){
       body: JSON.stringify({ nombre, email, whatsapp: tel, _subject: "Nuevo lead FREE - Sustratos Hidropónicos" })
     });
     if(resp.ok){
-      msg.innerHTML = "¡Listo! 🌱 Revisa tu correo. Si no llega, escríbenos por WhatsApp.";
+      msg.innerHTML = "¡Listo! 🌱 Revisa tu correo y también la carpeta de SPAM o Promociones para ver tu guía. Si no llega en unos minutos, escríbenos por WhatsApp.";
       msg.style.color = "#188640";
       document.getElementById('lm-nombre').value='';document.getElementById('lm-email').value='';document.getElementById('lm-tel').value='';
     } else { throw new Error('fallo'); }
