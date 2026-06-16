@@ -221,6 +221,13 @@ footer{background:#041009;border-top:1px solid rgba(255,255,255,.08);padding:38p
   #chatPanel{right:10px;bottom:10px;width:calc(100vw - 20px);height:min(560px,calc(100vh - 20px))}
 }
 </style>
+
+  <!-- MailerLite Universal -->
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,"script","https://assets.mailerlite.com/js/universal.js","ml");
+    ml("account","2447523");
+  </script>
+  <!-- End MailerLite Universal -->
 </head>
 <body>
 
@@ -544,6 +551,14 @@ async function enviarLead(){
   if(!/^[^@]+@[^@]+\.[^@]+$/.test(email)){msg.textContent = "Revisa que tu correo esté bien escrito."; msg.style.color = "#bd4719"; return;}
   msg.textContent = "Enviando..."; msg.style.color = "#3f4b3a";
   try{
+    try{
+      const mlBody = new URLSearchParams();
+      mlBody.append("fields[email]", email);
+      mlBody.append("fields[name]", nombre);
+      mlBody.append("ml-submit", "1");
+      mlBody.append("anticsrf", "true");
+      fetch("https://assets.mailerlite.com/jsonp/2447523/forms/190378648307500456/subscribe", { method: "POST", body: mlBody });
+    }catch(mlErr){}
     const resp = await fetch("https://formspree.io/f/mkoajyvy", {
       method: "POST",
       headers: { "Accept": "application/json", "Content-Type": "application/json" },
